@@ -2,9 +2,9 @@
 The app automates surgical instrument counts during operations, flags mismatches, and is powered by a modular end-to-end computer vision pipeline. It performs preprocessing (contrast/saturation, ImageNet normalization, rotation), generates masks with SAM/SAM2, and uses CLIP for pseudo-labeling/classification; then trains Mask R-CNN, ViT+LoRA (zero-shot→fine-tune), and SegFormer+LoRA, with a YOLOv8 training path for cross-validation. The system handles complex/overlapping shapes, auto-labels instruments, and supports reliable, real-time counting.
 
 ## Diagrams
-![High-Level Block Diagram](C:\Users\tarte\Downloads\High-Level Block Diagram.png)
-![Pipeline: Preprocessing and Segmentation](C:\Users\tarte\Downloads\Pipeline - Preprocessing and Segmentation.png)
-![Pipeline: Classification and Fine-Tuning](C:\Users\tarte\Downloads\Pipeline - Classification and Fine-Tuning.png)
+<img width="992" height="896" alt="High-Level Block Diagram" src="https://github.com/user-attachments/assets/a78e16aa-bd77-4c52-8881-e91efadb0212" />
+<img width="1341" height="752" alt="Pipeline: Preprocessing and Segmentation" src="https://github.com/user-attachments/assets/960e0f92-bc2c-4302-83dd-351523d16122" />
+<img width="1343" height="752" alt="Pipeline: Classification and Fine-Tuning" src="https://github.com/user-attachments/assets/0fde9cd7-eba0-4a51-9e96-17f0afe745bb" />
 
 ## Components
 1. `preprocessing.py` — resize to `224×224`, adjust contrast/brightness/saturation, ImageNet mean/std normalization, and rotation-based test augmentation. Outputs cleaned training images and rotated test images.
