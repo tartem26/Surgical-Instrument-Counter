@@ -11,7 +11,7 @@ The app automates surgical instrument counts during operations, flags mismatches
 2. `preprocessing_expanded.py` — as above, plus CLIP cosine similarity and SAM2 crop to improve labeling/cropping quality.
 3. `sam2_mask_generator.py` — generate segmentation masks with SAM2; (in-progress) CLIP filtering to keep masks semantically aligned (e.g., "surgical instrument").
 4. `autolabel_and_train.py`
-  - Auto-label SAM masks with CLIP into class folders.
+    - Auto-label SAM masks with CLIP into class folders.
   - Train Mask R-CNN (torchvision) on the labeled dataset for instance segmentation.
 5. `classified_crops.py` — SAM proposals → filter bboxes → CLIP zero-shot classification of crops; saves crops into label-named folders; optional visualization.
 6. `sam2_surgical_mask.py` — select best SAMv2 mask (e.g., largest area), optionally crop bottom region, export instrument with transparent background (RGBA PNG).
