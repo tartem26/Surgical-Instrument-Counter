@@ -1,5 +1,5 @@
 # Surgical Instrument Counter
-The app automates surgical instrument counts during operations, flags mismatches, and is powered by a modular end-to-end computer vision pipeline. It performs preprocessing (contrast/saturation, ImageNet normalization, rotation), generates masks with SAM/SAM2, and uses CLIP for pseudo-labeling/classification; then trains Mask R-CNN, ViT+LoRA (zero-shot→fine-tune), and SegFormer+LoRA, with a YOLOv8 training path for cross-validation. The system handles complex/overlapping shapes, auto-labels instruments, and supports reliable, real-time counting.
+The app automates surgical instrument counts during operations, flags mismatches, and is powered by a modular end-to-end computer vision pipeline. It performs preprocessing (contrast/saturation, ImageNet normalization, rotation), generates masks with SAM/SAM2, and uses CLIP for pseudo-labeling/classification; then trains Mask R-CNN, ViT + LoRA (zero-shot → fine-tune), and SegFormer + LoRA, with a YOLOv8 training path for cross-validation. The system handles complex/overlapping shapes, auto-labels instruments, and supports reliable, real-time counting.
 
 ## Diagrams
 <img width="992" height="896" alt="High-Level Block Diagram" src="https://github.com/user-attachments/assets/a78e16aa-bd77-4c52-8881-e91efadb0212" />
@@ -25,10 +25,10 @@ The app automates surgical instrument counts during operations, flags mismatches
 10. Model YOLO LoRA — dataset conversion to YOLO format, YOLOv8 training, and inference; logs/plots under `runs/detect/train/`.
 
 ## Key Parameters (examples)
-- Preprocessing: `TARGET_SIZE=(224,224)`, ImageNet `MEAN=[0.485,0.456,0.406]`, `STD=[0.229,0.224,0.225]`, rotation angles e.g., `[-15,-10,-5,5,10,15]`.
-- SAM proposals (typical): `points_per_side=32`, `pred_iou_thresh=0.9`, `stability_score_thresh=0.92`, `min_mask_region_area=50000`, `box_nms_thresh=0.7`.
-- BBox filtering: fractional area filter, e.g., `[0.03, 0.15]` relative to image.
-- CLIP: model `openai/clip-vit-large-patch14`, threshold e.g., `0.3`.
+- **Preprocessing:** `TARGET_SIZE=(224,224)`, ImageNet `MEAN=[0.485,0.456,0.406]`, `STD=[0.229,0.224,0.225]`, rotation angles e.g., `[-15,-10,-5,5,10,15]`.
+- **SAM proposals (typical):** `points_per_side=32`, `pred_iou_thresh=0.9`, `stability_score_thresh=0.92`, `min_mask_region_area=50000`, `box_nms_thresh=0.7`.
+- **BBox filtering:** fractional area filter, e.g., `[0.03, 0.15]` relative to image.
+- **CLIP:** model `openai/clip-vit-large-patch14`, threshold e.g., `0.3`.
 
 ## Setup
 Use `Python 3.8+` in a fresh virtual environment.
