@@ -12,16 +12,16 @@ The app automates surgical instrument counts during operations, flags mismatches
 3. `sam2_mask_generator.py` — generate segmentation masks with SAM2; (in-progress) CLIP filtering to keep masks semantically aligned (e.g., "surgical instrument").
 4. `autolabel_and_train.py`
     - Auto-label SAM masks with CLIP into class folders.
-  - Train Mask R-CNN (torchvision) on the labeled dataset for instance segmentation.
+    - Train Mask R-CNN (torchvision) on the labeled dataset for instance segmentation.
 5. `classified_crops.py` — SAM proposals → filter bboxes → CLIP zero-shot classification of crops; saves crops into label-named folders; optional visualization.
 6. `sam2_surgical_mask.py` — select best SAMv2 mask (e.g., largest area), optionally crop bottom region, export instrument with transparent background (RGBA PNG).
 7. `generate_masks_with_sam.py` — create binary segmentation masks for an entire, class-foldered dataset (SAM).
 8. Model LoRA 1
-  - `model.py` — fine-tune ViT with LoRA (classification).
-  - `inference.py` — classify whole image or segment-and-count via SAM2 + ViT+LoRA.
+    - `model.py` — fine-tune ViT with LoRA (classification).
+    - `inference.py` — classify whole image or segment-and-count via SAM2 + ViT+LoRA.
 9. Model LoRA 2
-  - `surgical_instrument_segmentation.py` — train SegFormer + LoRA (semantic segmentation).
-  - `inference.py` — run semantic segmentation and count pixels per class.
+    - `surgical_instrument_segmentation.py` — train SegFormer + LoRA (semantic segmentation).
+    - `inference.py` — run semantic segmentation and count pixels per class.
 10. Model YOLO LoRA — dataset conversion to YOLO format, YOLOv8 training, and inference; logs/plots under `runs/detect/train/`.
 
 ## Key Parameters (examples)
@@ -47,10 +47,10 @@ pip install ultralytics
 
 ## Typical Workflows
 1. Preprocess raw images
-  - Resize, normalize with ImageNet stats, adjust contrast/saturation, and create a rotated test set.
+    - Resize, normalize with ImageNet stats, adjust contrast/saturation, and create a rotated test set.
 2. Generate masks
-  - Per-image masks: `sam2_mask_generator.py` (SAM2).
-  - Dataset-wide binary masks: `generate_masks_with_sam.py` (SAM).
+    - Per-image masks: `sam2_mask_generator.py` (SAM2).
+    - Dataset-wide binary masks: `generate_masks_with_sam.py` (SAM).
 3. Auto-label with CLIP → train Mask R-CNN
   ```sh
   # Auto-label masks into class folders
@@ -72,7 +72,7 @@ pip install ultralytics
     --device cuda
   ```
 4. Crop proposals and classify with CLIP (zero-shot)
-  - Run `classified_crops.py` to produce class-organized crops; tune SAM params and area filters as needed.
+    - Run `classified_crops.py` to produce class-organized crops; tune SAM params and area filters as needed.
 5. ViT+LoRA classification
   ```sh
   # Train
@@ -94,10 +94,10 @@ pip install ultralytics
     --sam_checkpoint ./sam_vit_h.pth
   ```
 6. SegFormer+LoRA semantic segmentation
-  - Train with `surgical_instrument_segmentation.py`, then run `inference.py` to get classwise pixel counts and a visual mask overlay.
+    - Train with `surgical_instrument_segmentation.py`, then run `inference.py` to get classwise pixel counts and a visual mask overlay.
 7. YOLOv8 training path
-  - Convert foldered dataset to YOLO format → train YOLOv8 (`yolov8n.pt`).
-  - Metrics (confusion matrix, PR/F1 curves, etc.) are saved to `runs/detect/train/`.
+    - Convert foldered dataset to YOLO format → train YOLOv8 (`yolov8n.pt`).
+    - Metrics (confusion matrix, PR/F1 curves, etc.) are saved to `runs/detect/train/`.
 
 ## Notes
 - Ensure binary masks are `0/255` and that image/mask naming is consistent for training.
